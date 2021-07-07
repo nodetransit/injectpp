@@ -2,7 +2,7 @@
 #define INJECTPP_TYPEMAP_HPP_HEADER__
 
 
-namespace injectpp {
+namespace nt { namespace ioc {
 // Maps types to objects of ValueType
 template<class ValueType>
 class TypeMap
@@ -65,6 +65,6 @@ private:
     Container container_;
 };
 
-}
+}}
 
 #endif /* INJECTPP_TYPEMAP_HPP_HEADER__ */

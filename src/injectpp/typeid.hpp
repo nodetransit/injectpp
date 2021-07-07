@@ -3,7 +3,7 @@
 
 #include "injectppcommon.hpp"
 
-namespace injectpp {
+namespace nt { namespace ioc {
 std::atomic<int> g_type_id_counter(0);
 
 template<class Key>
@@ -14,6 +14,6 @@ type_id()
     return id;
 }
 
-}
+}}
 
 #endif /* INJECTPP_TYPEID_HPP_HEADER__ */

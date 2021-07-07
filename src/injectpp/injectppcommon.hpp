@@ -9,7 +9,7 @@
 #include <functional>
 
 
-namespace injectpp {
+namespace nt { namespace ioc {
 #if __cplusplus < 201402L
 
 template<typename T, typename... Args>
@@ -41,6 +41,6 @@ using remove_const_t = typename std::remove_const_t<T>;
 template<class InstanceType, class Deleter, class... Deps>
 using InstanceFactoryFunction = std::unique_ptr<InstanceType, Deleter>(*)(Deps* ...);
 
-}
+}}
 
 #endif /* INJECTPP_COMMON_HPP_HEADER__ */

@@ -4,7 +4,7 @@
 #include "injectppcommon.hpp"
 
 
-namespace injectpp {
+namespace nt { namespace ioc {
 class AbstractInstanceContainer
 {
 public:
@@ -13,7 +13,7 @@ public:
     virtual void* get() = 0;
 };
 
-}
+}}
 
 #endif /* INJECTPP_ABSTRACT_INSTANCE_CONTAINER_HPP_HEADER__ */
 

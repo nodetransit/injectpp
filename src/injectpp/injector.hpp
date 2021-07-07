@@ -8,7 +8,7 @@
 #include "injectppcommon.hpp"
 
 
-namespace injectpp {
+namespace nt { namespace ioc {
 class Injector
 {
     friend class Config;
@@ -42,7 +42,7 @@ public:
 private:
     Injector() = default;
 
-    using InstanceMap = injectpp::TypeMap<std::unique_ptr<injectpp::AbstractInstanceContainer>>;
+    using InstanceMap = nt::ioc::TypeMap<std::unique_ptr<nt::ioc::AbstractInstanceContainer>>;
 
     InstanceMap instance_map_;
 };
@@ -83,10 +83,10 @@ Injector::inject(
       InstanceFactoryFunction<InstanceType, Deleter, Deps...> instance_factory) const
 {
     return instance_factory(
-          get_object<typename injectpp::remove_const_t<Deps>,
-                     typename injectpp::remove_const_t<InstanceType>>()...);
+          get_object<typename nt::ioc::remove_const_t<Deps>,
+                     typename nt::ioc::remove_const_t<InstanceType>>()...);
 }
 
-}
+}}
 
 #endif /* INJECTPP_INJECTOR_HPP_HEADER__ */
