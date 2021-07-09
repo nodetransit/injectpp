@@ -14,12 +14,12 @@ class Injector
     friend class Config;
 
 public:
-    Injector(Injector&& other)
+    Injector(Injector&& other) noexcept
     {
         *this = std::move(other);
     }
 
-    Injector& operator=(Injector&& other)
+    Injector& operator=(Injector&& other) noexcept
     {
         instance_map_ = std::move(other.instance_map_);
 
