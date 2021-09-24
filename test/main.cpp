@@ -1,4 +1,4 @@
-#include <injectpp/injectpp.hpp>
+#include <injectpp.hpp>
 #include "test.hpp"
 
 
