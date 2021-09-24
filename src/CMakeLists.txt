@@ -52,7 +52,8 @@ if (LOSE)
 endif ()
 
 set (BINARY_NAME injectpp)
-add_library(${BINARY_NAME} ${INJECTPP_LIB_TYPE} "injector.cpp")
+add_library(${BINARY_NAME} ${INJECTPP_LIB_TYPE} "injector.cpp"
+                                                "config.cpp")
 
 configure_file ("${CMAKE_CURRENT_SOURCE_DIR}/injectpp.hpp.in" "${CMAKE_CURRENT_SOURCE_DIR}/injectpp.hpp")
 
