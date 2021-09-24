@@ -1,4 +1,5 @@
 #include <injectpp.hpp>
+#include <memory>
 #include "test.hpp"
 
 
@@ -226,6 +227,12 @@ runController(test::IController* c)
     c->control();
 }
 
+std::unique_ptr<test::Input>
+testInputFactory()
+{
+    return std::make_unique<test::Input>();
+}
+
 nt::ioc::Config
 createContainerConfig()
 {
@@ -234,7 +241,7 @@ createContainerConfig()
     cfg.add(cx::ControllerFactory);
     // cfg.add([](test::Service* s, test::Input* i) { return std::make_unique<test::Controller>(s, i); });
     cfg.add(cx::ServiceFactory);
-    cfg.add([] { return std::make_unique<test::Input>; }());
+    cfg.add(testInputFactory);
     cfg.add(cx::ConfigFactory);
 
     return cfg;

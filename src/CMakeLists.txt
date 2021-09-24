@@ -60,9 +60,12 @@ if (LOSE)
     configure_file ("${CMAKE_CURRENT_SOURCE_DIR}/manifest.rc.in" "${CMAKE_CURRENT_SOURCE_DIR}/manifest.rc")
 endif ()
 
+set (COMMON_COMPILE_OPTIONS "")
+set (COMMON_DEBUG_COMPILE_OPTTIONS "")
+
 if (${INJECTPP_LIB_TYPE} STREQUAL "STATIC")
     set_property(${BINARY_NAME} ${BINARY_NAME} PROPERTY POSITION_INDEPENDENT_CODE ON)
-    add_definitions (-DINJECTPP_LIB_EXPORT=1)
+    #add_definitions (-DINJECTPP_LIB_EXPORT=1)
 elseif (${INJECTPP_LIB_TYPE} STREQUAL "SHARED")
     if (LOSE)
         set (CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
@@ -96,11 +99,15 @@ elseif (${INJECTPP_LIB_TYPE} STREQUAL "SHARED")
                                                          ARCHIVE_OUTPUT_NAME ${BINARY_NAME})
     endif ()
 
-    list (APPEND COMMON_COMPILE_OPTIONS -DINJECTPP_LIB_EXPORT=1)
+    list (APPEND COMMON_COMPILE_OPTIONS "-DINJECTPP_LIB_EXPORT=1")
 
     set_target_properties(${BINARY_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
     set_target_properties(${BINARY_NAME} PROPERTIES SOVERSION ${PROJECT_VERSION_MAJOR})
 endif ()
+
+target_compile_options (${BINARY_NAME} PRIVATE ${COMMON_COMPILE_OPTIONS}
+                                               ${COMMON_DEBUG_COMPILE_OPTTIONS})
+
 target_include_directories(${BINARY_NAME}
                            PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
                                   "$<INSTALL_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}")

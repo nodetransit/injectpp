@@ -32,7 +32,7 @@ public:
 
 
 private:
-    Injector() = default;
+    __InjectppPort__ Injector() = default;
 
     using InstanceMap = nt::ioc::TypeMap<std::unique_ptr<nt::ioc::AbstractInstanceContainer>>;
 
