@@ -82,7 +82,7 @@ if (DEBUG)
                          -fdiagnostics-show-option
                          -fmax-errors=3)
     else ()
-        add_definitions ("-ZI")
+        add_definitions ("-Zi")
     endif ()
 else ()
     if (NOT MSVC)

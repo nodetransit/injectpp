@@ -1,6 +1,34 @@
 #ifndef INJECTPP_HPP_HEADER__
 #define INJECTPP_HPP_HEADER__
 
+#cmakedefine INJECTPP_EXPORT_SHARED
+#cmakedefine INJECTPP_EXPORT_STATIC
+
+#ifdef INJECTPP_LIB_EXPORT /* inside DLL, export functons */
+#
+#   ifdef _MSC_VER
+#       define __InjectppPort__ __declspec(dllexport)
+#   elif __GNUC__
+#       define __InjectppPort__ __attribute__((visibility("default")))
+#   else
+#       define __InjectppPort__
+#       pragma warning Unknown dynamic link export semantic.
+#   endif
+#
+#elif !defined INJECTPP_LIB_EXPORT /* compile as static */
+#
+#   ifdef _MSC_VER
+#       define __InjectppPort__ __declspec(dllimport)
+#   elif __GNUC__
+#       define __InjectppPort__
+#   else
+#       define __InjectppPort__
+#       pragma warning Unknown dynamic link import semantic.
+#   endif
+#
+#endif
+
+
 #include "injectpp/injectppcommon.hpp"
 #include "injectpp/typeid.hpp"
 #include "injectpp/typemap.hpp"

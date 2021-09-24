@@ -14,9 +14,9 @@ class Injector
     friend class Config;
 
 public:
-    Injector(Injector&& other) noexcept;
+    __InjectppPort__ Injector(Injector&& other) noexcept;
 
-    Injector& operator=(Injector&& other) noexcept;
+    __InjectppPort__ Injector& operator=(Injector&& other) noexcept;
 
     template<class T, class Y>
     Y* get_instance() const;
