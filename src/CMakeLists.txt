@@ -3,11 +3,11 @@ project(injectpp VERSION 0.1.0
                  DESCRIPTION "Template IOC Container Library"
                  HOMEPAGE_URL "https://github.com/nodetransit")
 
-add_library(injectpp INTERFACE)
+add_library(injectpp SHARED "injector.cpp")
 
 target_include_directories(injectpp
-                           INTERFACE "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
-                                     "$<INSTALL_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}")
+                           PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
+                                  "$<INSTALL_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}")
 
 #install(TARGETS injectpp
 #        EXPORT injectpp_targets

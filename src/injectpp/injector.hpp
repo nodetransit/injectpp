@@ -14,17 +14,9 @@ class Injector
     friend class Config;
 
 public:
-    Injector(Injector&& other) noexcept
-    {
-        *this = std::move(other);
-    }
+    Injector(Injector&& other) noexcept;
 
-    Injector& operator=(Injector&& other) noexcept
-    {
-        instance_map_ = std::move(other.instance_map_);
-
-        return *this;
-    }
+    Injector& operator=(Injector&& other) noexcept;
 
     template<class T, class Y>
     Y* get_instance() const;
