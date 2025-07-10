@@ -4,10 +4,10 @@
 #include "injectppcommon.hpp"
 
 namespace nt { namespace ioc {
-std::atomic<int> g_type_id_counter(0);
+static std::atomic<int> g_type_id_counter(0);
 
 template<class Key>
-static int
+int
 type_id()
 {
     static int id = ++g_type_id_counter;

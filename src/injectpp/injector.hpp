@@ -27,16 +27,41 @@ public:
     }
 
     template<class T, class Y>
-    Y* get_instance() const;
+    Y* get_instance() const
+    {
+        return dynamic_cast<Y*>(get_object<T>());
+    }
 
     template<class T>
-    T* get_instance() const;
+    T* get_instance() const
+    {
+        auto o = get_object<T>();
+
+        return o;
+    }
 
     template<class T, class Dependee = std::nullptr_t>
-    T* get_object() const;
+    T* get_object() const
+    {
+        auto it = instance_map_.find<T>();
+
+        if (it == instance_map_.end()) {
+            throw std::runtime_error(
+                  std::string(typeid(T).name()) +
+                  ": unsatisfied dependency of "
+                  + std::string(typeid(Dependee).name()));
+        }
+
+        return static_cast<T*>(it->second->get());
+    }
 
     template<class InstanceType, class Deleter, class ...Deps>
-    std::unique_ptr<InstanceType, Deleter> inject(InstanceFactoryFunction<InstanceType, Deleter, Deps...> instance_factory) const;
+    std::unique_ptr<InstanceType, Deleter> inject(InstanceFactoryFunction<InstanceType, Deleter, Deps...> instance_factory) const
+    {
+        return instance_factory(
+              get_object<typename nt::ioc::remove_const_t<Deps>,
+                         typename nt::ioc::remove_const_t<InstanceType>>()...);
+    }
 
 
 private:
@@ -46,46 +71,6 @@ private:
 
     InstanceMap instance_map_;
 };
-
-template<class T, class Y>
-Y*
-Injector::get_instance() const
-{
-    return dynamic_cast<Y*>(get_object<T>());
-}
-
-template<class T>
-T*
-Injector::get_instance() const
-{
-    return get_object<T>();
-}
-
-template<class T, class Dependee>
-T*
-Injector::get_object() const
-{
-    auto it = instance_map_.find<T>();
-
-    if (it == instance_map_.end()) {
-        throw std::runtime_error(
-              std::string(typeid(T).name()) +
-              ": unsatisfied dependency of "
-              + std::string(typeid(Dependee).name()));
-    }
-
-    return static_cast<T*>(it->second->get());
-}
-
-template<class InstanceType, class Deleter, class ...Deps>
-std::unique_ptr<InstanceType, Deleter>
-Injector::inject(
-      InstanceFactoryFunction<InstanceType, Deleter, Deps...> instance_factory) const
-{
-    return instance_factory(
-          get_object<typename nt::ioc::remove_const_t<Deps>,
-                     typename nt::ioc::remove_const_t<InstanceType>>()...);
-}
 
 }}
 
