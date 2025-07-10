@@ -2,6 +2,10 @@ project(injectpp_test)
 
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
 #---------------------------------------------------------------------
 
 option (DEBUG "Compile with debug symbols." OFF)
@@ -52,7 +56,7 @@ add_executable(injectpp_test ${SOURCE_FILES})
 #---------------------------------------------------------------------
 
 if (NOT MSVC)
-    target_compile_options (injectpp_test PRIVATE "-std=c++11")
+    # target_compile_options (injectpp_test PRIVATE "-std=c++11")
     add_definitions("--pedantic")
 
     target_compile_options (injectpp_test PRIVATE "-Wno-missing-braces"

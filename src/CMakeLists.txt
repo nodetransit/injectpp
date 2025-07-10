@@ -3,6 +3,10 @@ project(injectpp VERSION 0.1.0
                  DESCRIPTION "Template IOC Container Library"
                  HOMEPAGE_URL "https://github.com/nodetransit")
 
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
 add_library(injectpp INTERFACE)
 
 target_include_directories(injectpp
