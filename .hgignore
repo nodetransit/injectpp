@@ -1,0 +1,135 @@
+syntax:glob
+# scm files
+*.fossil
+.git/*
+.hg/*
+
+# project files
+.idea/*
+*.sublime-*
+.viproj*
+.vimproj*
+.project
+.vscode/*
+*.iml
+.JustCode
+
+# temporary directories and 3rd party source code directories
+bin/*
+tmp/*
+var/*
+cache/*
+log/*
+extern/*
+lib/*
+logs/*
+docs/*
+obj/*
+dev/.zim/*
+vendor/*
+.gradle/*
+build/*
+*.ide/*
+*.aps
+*.ncb
+*.opensdf
+*.sdf
+*.cachefile
+*.psess
+*.vsp
+*.vspx
+*.dbmdl
+*.dbproj.schemaview
+*.pfx
+*.publishsettings
+# temporary files
+*.tmp
+*.bak
+*.bak.*
+*.bak.*/*
+*.orig
+*.tmp
+*-original
+*.Cache
+*~
+*-baseline
+*-original
+*-merge
+
+# stack generated files/folders
+.stack-work/*
+stack.yaml.lock
+
+# npm generated files/folders
+node_modules/*
+npm-debug.log
+package-lock.json
+npm-debug.log
+yarn-error.log
+
+# composer/phpunit generated files/folders
+composer.phar
+composer.lock
+.phpunit.result.cache
+
+# nuget generated files/folders
+*.nupkg
+**/packages/*
+!**/packages/build/
+!**/packages/repositories.config
+
+# system generated files
+.buildpath
+.settings
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+.~lock.*
+~$*
+
+# Build results
+[Dd]ebug/*
+[Dd]ebugPublic/*
+[Rr]elease/*
+[Rr]eleases/*
+[Dd]ebugPS/*
+[Rr]eleasePS/*
+x64/*
+x86/*
+build/*
+bld/*
+[Bb]in/*
+[Oo]bj/*
+[Tt]est[Rr]esult*/*
+[Bb]uild[Ll]og.*
+*.VisualState.xml
+TestResult.xml
+dlldata.c
+
+# CMake
+CMakeLists.txt.user
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+_deps
+
+# project specific
+src/public/assets/scripts/vendor/*
+bootstrap/compiled.php
+app/storage/*
+public/storage/*
+public/hot/*
+.env
+storage/*.key
+
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
