@@ -7,7 +7,7 @@ namespace nt { namespace ioc {
 template<class ValueType>
 class TypeMap
 {
-    using Container = std::unordered_map<int, ValueType>;
+    using Container = std::map<int, ValueType>;
 
 public:
     using iterator = typename Container::iterator;
