@@ -95,7 +95,7 @@ private:
         }
     }
 
-    std::unordered_map<int, DependencyNode> graph;
+    std::map<int, DependencyNode> graph;
 };
 
 }}
