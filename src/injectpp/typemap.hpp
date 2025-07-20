@@ -61,6 +61,24 @@ public:
         container_[type_id<Key>()] = std::forward<ValueType>(value);
     }
 
+    void clear(const std::vector<int>& order)
+    {
+        for (auto& id : order)
+        {
+            if (container_.find(id) != container_.end())
+            {
+                container_.erase(id);
+            }
+        }
+
+        container_.clear();
+        // auto it = container_.cbegin();
+        // while (it != container_.cend())
+        // {
+        //     container_.erase(it++);
+        // }
+    }
+
 private:
     Container container_;
 };
