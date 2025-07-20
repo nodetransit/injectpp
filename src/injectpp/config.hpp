@@ -32,6 +32,8 @@ public:
     {
         Injector injector;
 
+        injector.destruction_order = order;
+
         for (auto& node : graph) {
             // This test is logically redundant, it's just for better performance.
             if (node.second.mark_ == DependencyNode::Mark::Unmarked) {
@@ -44,6 +46,8 @@ public:
 
 private:
     using InitializerFn = std::function<void(Injector & )>;
+
+	std::vector<int> order;
 
     struct DependencyNode
     {
