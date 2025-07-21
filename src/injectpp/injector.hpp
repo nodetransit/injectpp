@@ -22,6 +22,7 @@ public:
     Injector& operator=(Injector&& other) noexcept
     {
         instance_map_ = std::move(other.instance_map_);
+        destruction_order = std::move(other.destruction_order);
 
         return *this;
     }
@@ -63,6 +64,12 @@ public:
                          typename nt::ioc::remove_const_t<InstanceType>>()...);
     }
 
+    ~Injector()
+    {
+        instance_map_.clear(destruction_order);
+    }
+
+    std::vector<int> destruction_order;
 
 private:
     Injector() = default;
