@@ -6,9 +6,23 @@
 
 
 namespace nt { namespace ioc {
+
+template<class T, class ...Deps>
+std::unique_ptr<T>
+default_factory(Deps*... deps)
+{
+    return std::make_unique<T>(deps...);
+}
+
 class Config
 {
 public:
+    template<class InstanceType, class ...Deps>
+    void add()
+    {
+        add(default_factory<InstanceType, Deps...>);
+    }
+
     template<class InstanceType, class Deleter, class ...Deps>
     void add(InstanceFactoryFunction<InstanceType, Deleter, Deps...> instance_factory)
     {
@@ -25,6 +39,28 @@ public:
         node.debug_type_name = typeid(typename nt::ioc::remove_const_t<InstanceType>).name();
 
         node.dependencies = {nt::ioc::type_id<typename nt::ioc::remove_const_t<Deps>>()...};
+    }
+
+    template<class InstanceType, class ...InstanceTypes>
+    void remove()
+    {
+        std::vector<int> ids =
+            {nt::ioc::type_id<typename nt::ioc::remove_const_t<InstanceType>>(),
+             nt::ioc::type_id<typename nt::ioc::remove_const_t<InstanceTypes>>()...};
+
+        for (auto& id : ids)
+        {
+			if (graph.find(id) != graph.end())
+			{
+				graph.erase(id);
+			}
+        }
+    }
+
+    template<class ...Deps>
+    void setDestructionOrder()
+    {
+        order = {nt::ioc::type_id<typename nt::ioc::remove_const_t<Deps>>()...};
     }
 
     // Create Instances
