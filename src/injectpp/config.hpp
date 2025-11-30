@@ -9,13 +9,6 @@ namespace nt { namespace ioc {
 
 template<class U, class T, class ...Deps>
 std::unique_ptr<U>
-default_factory_as(Deps*... deps)
-{
-    return std::make_unique<T>(deps...);
-}
-
-template<class T, class ...Deps>
-std::unique_ptr<T>
 default_factory(Deps*... deps)
 {
     return std::make_unique<T>(deps...);
@@ -27,13 +20,13 @@ public:
     template<class Base, class InstanceType, class ...Deps>
     void add_as()
     {
-        add(default_factory_as<Base, InstanceType, Deps...>);
+        add(default_factory<Base, InstanceType, Deps...>);
     }
 
     template<class InstanceType, class ...Deps>
     void add()
     {
-        add(default_factory<InstanceType, Deps...>);
+        add(default_factory<InstanceType, InstanceType, Deps...>);
     }
 
     template<class InstanceType, class Deleter, class ...Deps>
