@@ -1,6 +1,10 @@
 #ifndef INJECTPP_HPP_HEADER__
 #define INJECTPP_HPP_HEADER__
 
+#if __cplusplus < 201402L
+#    error "injectpp requires c++14"
+#endif
+
 #include "injectpp/injectppcommon.hpp"
 #include "injectpp/typeid.hpp"
 #include "injectpp/typemap.hpp"
