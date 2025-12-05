@@ -8,6 +8,24 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_library(injectpp INTERFACE)
+add_library(injectpp::injectpp ALIAS injectpp)
+install (TARGETS injectpp
+         EXPORT injectpp_Targets
+         RUNTIME DESTINATION bin
+         LIBRARY DESTINATION lib
+         ARCHIVE DESTINATION lib
+       # PUBLIC_HEADER DESTINATION include
+         )
+install (FILES "injectpp.hpp"
+         DESTINATION include)
+install (FILES "injectpp/abstractinstancecontainer.hpp"
+               "injectpp/config.hpp"
+               "injectpp/injector.hpp"
+               "injectpp/injectppcommon.hpp"
+               "injectpp/instancecontainer.hpp"
+               "injectpp/typeid.hpp"
+               "injectpp/typemap.hpp"
+         DESTINATION include/injectpp)
 
 target_include_directories(injectpp
                            INTERFACE "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
